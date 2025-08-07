@@ -23,9 +23,6 @@ jobs:
       with:
         version: 'v3.14.4'
 
-    - name: Install Helm
-      uses: azure/setup-helm@v1
-
     - name: Create kubeconfig file
       run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > ${{ github.workspace }}/kubeconfig
 
