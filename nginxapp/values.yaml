@@ -8,3 +8,8 @@ service:
   port: 3005
 
 replicaCount: 3
+
+serviceAccount:
+  create: true
+  name: ""     # Leave empty to let Helm default to the release name
+
