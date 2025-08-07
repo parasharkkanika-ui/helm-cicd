@@ -3,7 +3,7 @@ kind: Deployment     # Defines the resource type; in this case, it is a Deployme
 metadata:
   name: my-app   # The name of the Deployment, used to identify it within the Kubernetes cluster
 spec:
-  replicas: 1        # The desired number of pod replicas to run
+  replicas: "{{ .Values.replicaCount }}"      # The desired number of pod replicas to run
   selector:
     matchLabels:     # Selector to identify the pods managed by this Deployment
       app: my-app # The label that must match the pods to be managed

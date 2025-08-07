@@ -22,7 +22,7 @@ jobs:
       uses: azure/setup-helm@v1
 
     - name: Create kubeconfig file
-      run: echo "${{ secrets.KUBECONFIG }}" > ${{ github.workspace }}/kubeconfig
+      run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > ${{ github.workspace }}/kubeconfig
 
     - name: Deploy to Kubernetes using Helm
       env:
