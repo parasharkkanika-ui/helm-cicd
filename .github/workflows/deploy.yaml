@@ -1,0 +1,36 @@
+name: Deploy to Kubernetes using Helm
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.23.0'
+
+    - name: Install Helm
+      uses: azure/setup-helm@v1
+
+    - name: Create kubeconfig file
+      run: echo "${{ secrets.KUBECONFIG }}" > ${{ github.workspace }}/kubeconfig
+
+    - name: Deploy to Kubernetes using Helm
+      env:
+        KUBECONFIG: ${{ github.workspace }}/kubeconfig
+      run: |
+        cd my-app
+        helm upgrade --install my-app . \
+        --set image.repository=kanika3000/nginx-helm \
+        --set image.tag=latest \
+        --namespace default
+
