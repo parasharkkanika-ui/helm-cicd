@@ -1,0 +1,19 @@
+apiVersion: apps/v1  # Specifies the version of the Kubernetes API to use for the Deployment
+kind: Deployment     # Defines the resource type; in this case, it is a Deployment
+metadata:
+  name: my-app   # The name of the Deployment, used to identify it within the Kubernetes cluster
+spec:
+  replicas: 1        # The desired number of pod replicas to run
+  selector:
+    matchLabels:     # Selector to identify the pods managed by this Deployment
+      app: my-app # The label that must match the pods to be managed
+  template:          # Template for the pod that will be created by the Deployment
+    metadata:
+      labels:       # Labels assigned to the pods created by this Deployment
+        app: my-app # The same label used in the selector to link the pods to the Deployment
+    spec:
+      containers:    # Specifies the list of containers to run in the pod
+        - name: my-app  # Name of the container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" # Docker image used for the container
+          ports:       # List of ports to expose from the container
+            - containerPort: 3005 # The port that the container listens on, matching the port defined in the Dockerfile

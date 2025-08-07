@@ -1,0 +1,10 @@
+image:
+  repository: kanika3000/nginx-helm
+  tag: "latest"
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 3005
+
+replicaCount: 3
