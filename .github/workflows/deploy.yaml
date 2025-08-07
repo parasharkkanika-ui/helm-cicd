@@ -31,7 +31,7 @@ jobs:
         KUBECONFIG: ${{ github.workspace }}/kubeconfig
       run: |
         cd nginxapp
-        helm upgrade --install my-app . \
+        helm upgrade --install my-app . --namespace actions --create-namespace
         --set image.repository=kanika3000/nginx-helm \
         --set image.tag=latest \
         --namespace default
